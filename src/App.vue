@@ -3,13 +3,13 @@
     <Input title="ac" :refName="refForm.ac" v-model="form.ac" required="true" @clean="clean">
       <span slot="errMsg" v-if="showErrMsg.ac">規範 6-12位數，英數字</span>
     </Input>
-    <Input title="pw" v-model="form.pw" required="true" @clean="clean">
-      <span slot="errMsg" v-if="showErrMsg.pw">規範 6-12位數，英數字</span>
+    <Input title="pw" v-model="form.pw" required="true" @clean="clean" @change="validate">
+      <span slot="errMsg" v-if="showErrMsg.pw">規範 4位數，英數字</span>
     </Input>
-    <Input title="captcha" :refName="refForm.captcha" v-model="form.captcha" required="true" @clean="clean">
-      <span slot="errMsg" v-if="showErrMsg.captcha">規範 6-12位數，英數字</span>
+    <Input title="captcha" :refName="refForm.captcha" v-model="form.captcha" required="true" @clean="clean" @change="validate">
+      <span slot="errMsg" v-if="showErrMsg.captcha">規範 4位數，英數字</span>
     </Input>
-    <button @click="validate">Submit</button>
+    <button @click="submit">Submit</button>
   </div>
 </template>
 
@@ -21,6 +21,14 @@ export default {
   name: 'App',
   components: {
     Input
+  },
+  watch: {
+    form: {
+      deep: true,
+      handler() {
+        this.validate()
+      }
+    }
   },
   data() {
     return {
@@ -46,8 +54,9 @@ export default {
       for (const key in this.form) {
         if (!utilTool.checkStr(this.form[key], key)) {
           this.showErrMsg[key] = true
+        } else {
+          this.showErrMsg[key] = false
         }
-        this.handleRefName()
       }
     },
     clean() {
@@ -61,6 +70,10 @@ export default {
           break;
         }
       }
+    },
+    submit() {
+      this.validate()
+      this.handleRefName()
     }
   }
 }

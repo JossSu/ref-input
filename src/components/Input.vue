@@ -12,7 +12,7 @@
 <script>
 export default {
   name: "Input",
-  props:['placeholder', 'title', 'type', 'refName', 'value', 'required','errMsg'],
+  props:['placeholder', 'title', 'type', 'refName', 'value', 'required','errMsg', 'validate'],
   watch: {
     refName: {
       immediate: true,
