@@ -1,8 +1,8 @@
 <template>
   <div id="app">
-    <Input title="ac" :ref="refForm.ac" v-model="form.ac"/>
-    <Input title="pw" :ref="refForm.pw" v-model="form.pw"/>
-    <Input title="captcha" :ref="refForm.captcha" v-model="form.captcha"/>
+    <Input title="ac" :refName="refForm.ac" v-model="form.ac" required="true"/>
+    <Input title="pw" :refName="refForm.pw" v-model="form.pw" required="true"/>
+    <Input title="captcha" :refName="refForm.captcha" v-model="form.captcha" required="true"/>
     <button @click="validate">Submit</button>
   </div>
 </template>
@@ -33,11 +33,12 @@ export default {
   methods: {
     validate() {
       for (const key in this.form) {
-        console.log(this.form[key])
-        if (!utilTool.checkStr(this.form[key], `${key}`)) {
+        // console.log(this.form[key])
+        if (!utilTool.checkStr(this.form[key], key)) {
           this.refForm[key] = key
+          console.log(this.refForm[key])
+          break;
         }
-        return
       }
     }
   }

@@ -2,21 +2,22 @@
   <div class="input">
     <div class="title">
       <div>{{title}}</div>
-      <span>*</span>
+      <span v-show="required">*</span>
     </div>
-    <input :placeholder="placeholder" :type="type||'text'" :value="value" ref="refName" @input="change"/>
+    <input :placeholder="placeholder" :type="type||'text'" :value="value" :ref="refName" @input="change"/>
   </div>
 </template>
 <script>
 export default {
   name: "Input",
-  props:['placeholder', 'title', 'type', 'refName', 'value'],
+  props:['placeholder', 'title', 'type', 'refName', 'value', 'required'],
   watch: {
     refName: {
       immediate: true,
       handler(val) {
         if(val && val !=='') {
           let refsName = this.refName
+          console.log('refsName', this.refName)
           this.$nextTick(function(){
             this.$refs[refsName].focus()
           })
