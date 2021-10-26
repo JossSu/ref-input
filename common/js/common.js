@@ -6,7 +6,7 @@ export default {
         switch(type) {
             //AC 規範 6-12位數，英數字 [required]
             case 'ac':
-                return /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{4,}$/.test(str)
+                return /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,12}$/.test(str)
             // PW 規範 4位數，英數字 [required]
             case 'ps':
                 return /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{4,}$/.test(str)

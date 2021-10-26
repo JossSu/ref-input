@@ -5,12 +5,14 @@
       <span v-show="required">*</span>
     </div>
     <input :placeholder="placeholder" :type="type||'text'" :value="value" :ref="refName" @input="change"/>
+    <slot name="errMsg"/>
+    <div v-if="errMsg">{{errMsg}}</div>
   </div>
 </template>
 <script>
 export default {
   name: "Input",
-  props:['placeholder', 'title', 'type', 'refName', 'value', 'required'],
+  props:['placeholder', 'title', 'type', 'refName', 'value', 'required','errMsg'],
   watch: {
     refName: {
       immediate: true,
