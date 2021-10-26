@@ -17,9 +17,9 @@ export default {
       handler(val) {
         if(val && val !=='') {
           let refsName = this.refName
-          console.log('refsName', this.refName)
           this.$nextTick(function(){
             this.$refs[refsName].focus()
+            this.$emit('clean')
           })
         }
       }
